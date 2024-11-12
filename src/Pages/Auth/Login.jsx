@@ -123,7 +123,7 @@ function Login() {
                 height="8.05267"
                 fill="#6c63ff"
               />
-              <path
+              <parth
                 d="M565.897,700.13773h-381a1,1,0,1,1,0-2h381a1,1,0,0,1,0,2Z"
                 transform="translate(-183.89698 -199.82188)"
                 fill="#cbcbcb"
@@ -133,7 +133,7 @@ function Login() {
 
           <form className="flex flex-col w-full p-8 mt-10 bg-gray-200 rounded-lg lg:2/6 md:w-1/3 md:ml-auto md:mt-0">
             <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">
-              Sign Up
+              Sign In
             </h2>
 
             {/* email*/}

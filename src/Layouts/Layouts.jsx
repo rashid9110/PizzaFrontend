@@ -3,7 +3,7 @@ import Footer from '../Components/Icon/Footer'
 function Layout({children}){
     return(
         <div>
-            <nav className="flex items-center justify-around h-16 text-[#6B7280] font-mono border-none shadow-md">
+            <nav className="flex items-center justify-around h-18 text-[#6B7280] font-mono border-none shadow-md">
                 <div className="flex items-center justify-center">
                     <p>Pizza App</p>
                    <img src={Pizzalogo} alt='Pizza logo'/>

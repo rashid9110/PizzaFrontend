@@ -1,11 +1,16 @@
 import Layout from "../../Layouts/Layouts";
+import Food from "../../assets/Images/food.svg";
 
 function AddProduct() {
   return (
     <div>
       <Layout>
         <section className="py-12">
-          <div className="max-w-md mx-auto mt-8 bg-white p-7">
+            <div className="flex items-center justify-around">
+                <div className="md:w-2/6">
+                    <img src={Food}/>
+                </div>
+            <div className="max-w-md md:w-4/6 mx-auto mt-8 bg-white p-4">
             <h2 className="mb-4 text-2xl font-semibold">Add New Product</h2>
             <form>
               {/* Product Name */}
@@ -125,6 +130,8 @@ function AddProduct() {
               </button>
             </form>
           </div>
+            </div>
+         
         </section>
       </Layout>
     </div>

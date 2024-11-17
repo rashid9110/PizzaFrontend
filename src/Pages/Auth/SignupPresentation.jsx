@@ -124,15 +124,15 @@ function SignUpPresentation({handelUserInput, handleFormSubmit}){
     
                 <div className="relative mb-4">
                   <label
-                    htmlFor="mobileNumber"
+                    htmlFor="mobilNumber"
                     className="text-sm leading-7 text-gray-600"
                   >
                     Mobile Number<span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
-                    id="mobileNumber"
-                    name="mobileNumber"
+                    id="mobilNumber"
+                    name="mobilNumber"
                     required
                     onChange={handelUserInput}
     

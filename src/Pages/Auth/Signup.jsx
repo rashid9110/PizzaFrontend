@@ -1,23 +1,31 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import SignUpPresentation from "./SignupPresentation";
+import { useDispatch } from "react-redux";
+import { createAccount } from "../../Redux/Slices/AuthSlice";
+import { useNavigate } from "react-router-dom";
 function Signup() {
+  const dispatch =useDispatch();
+  const navigate=useNavigate();
   const [signUpState,setSignUpState] =useState({
     firstName:'',
     email:'',
-    mobileNumber:'',
+    mobilNumber:'',
     password:'',
   });
+
   function handelUserInput(e) {
     const {name,value}=e.target;
+    
     setSignUpState({...signUpState,[name]:value});
   }
-  function handleFormSubmit(e) {
+  
+  async function handleFormSubmit(e) {
     e.preventDefault();//prevent the form reloading the page
     console.log(signUpState)
 
     //Add validations for the form input
-    if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password|| !signUpState.firstName){
+    if(!signUpState.email || !signUpState.mobilNumber || !signUpState.password|| !signUpState.firstName){
      toast.error("Missing value for the form")
       return;
     }
@@ -34,9 +42,15 @@ function Signup() {
 
     //check mobile number
 
-    if(signUpState.mobileNumber.length<10||signUpState.mobileNumber.length>12){
+    if(signUpState.mobilNumber.length<10||signUpState.mobilNumber.length>12){
       toast.error("Moblile number should between 10 and 12 characters long")
       return
+    }
+    const apiRespose = await dispatch(createAccount(signUpState))
+    console.log("API response is", apiRespose)
+    console.log("success",apiRespose.payload.success)
+    if(apiRespose.payload.success){
+        navigate('/auth/login')
     }
   }
 return(

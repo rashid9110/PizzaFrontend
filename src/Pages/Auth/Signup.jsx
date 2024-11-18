@@ -16,6 +16,8 @@ function Signup() {
 
   function handelUserInput(e) {
     const {name,value}=e.target;
+    console.log(name, value);
+
     
     setSignUpState({...signUpState,[name]:value});
   }
@@ -49,7 +51,7 @@ function Signup() {
     const apiRespose = await dispatch(createAccount(signUpState))
     console.log("API response is", apiRespose)
     console.log("success",apiRespose.payload.success)
-    if(apiRespose.payload.success){
+    if(apiRespose.payload.data.success){
         navigate('/auth/login')
     }
   }

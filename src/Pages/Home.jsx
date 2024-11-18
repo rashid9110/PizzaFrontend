@@ -8,8 +8,18 @@ import EnjoyImage from "../assets/Images/enjoy.png";
 
 import IconPatchCheck from "../Components/Icon/patch-check.jsx";
 import Layout from "../Layouts/Layouts.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../Redux/Slices/ProductSlices.js";
 
 function Home() {
+  const dispatch=useDispatch();
+
+  const {productsData}=useSelector((state)=>state.product)
+  useEffect(()=>{
+    //This will be called when the component mounts
+    dispatch(getAllProducts())
+  },[])
   return (
     <Layout>
     <div>
@@ -139,6 +149,7 @@ function Home() {
           </div>
         </div>
       </section>
+      {productsData.map((product)=><div key={product._id}>{product.productName}</div>)}
     </div>
     </Layout>
   );

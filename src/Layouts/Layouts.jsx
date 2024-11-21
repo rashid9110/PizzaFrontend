@@ -4,6 +4,8 @@ import Footer from "../Components/Icon/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import CartIcon from '../assets/Images/cart.svg'
 import { logout } from "../Redux/Slices/AuthSlice";
+import { useEffect } from "react";
+import { getCartDetails } from "../Redux/Slices/CartSlice";
 function Layout({ children }) {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -15,6 +17,20 @@ function Layout({ children }) {
     e.preventDefault();
     dispatch(logout());
   }
+
+  async function fetchCartDetails(){
+    const res=await dispatch(getCartDetails());
+
+    if(res?.payload?.isUnauthorized){
+      dispatch(logout());
+
+    }
+  }
+  useEffect(()=>{
+    if(isLoggedIn){
+      fetchCartDetails();
+    }
+  },[]);
   return (
     <div>
       <nav className="flex items-center justify-around h-18 text-[#6B7280] font-mono border-none shadow-md">

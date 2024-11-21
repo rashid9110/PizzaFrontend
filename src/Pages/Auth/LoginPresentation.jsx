@@ -37,7 +37,7 @@ function LoginPresentation({ handleFormSubmit, handleUserInput }) {
         const apiReponse = await dispatch(login(loginState));
         console.log("Api response", apiReponse);
        
-        if(apiReponse.payload.data.success) {
+        if(apiReponse.payload?.data?.success) {
             navigate('/');
         }
     }

@@ -50,6 +50,12 @@ export const getCartDetails = createAsyncThunk('/cart/getDetails', async () => {
         return apiResponse;
     } catch(error) {
         console.log(error);
+        if(error?.response?.status===401){
+            toast.error('Please login to view cart');
+            return{
+                isUnauthorized:true,
+            }
+        }
         toast.error('Something went wrong');
     }
 });
@@ -58,12 +64,20 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        clearCart: (state) => {
+            console.log("clearCart reducer executed", state.cartsData); // Before
+            state.cartsData = '';
+            console.log("State after clearing cart:", state.cartsData); // After
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getCartDetails.fulfilled, (state, action) => {
             state.cartsData = action?.payload?.data?.data;
         });
+
     }
 });
+
+export const { clearCart } = cartSlice.actions; // Export the clearCart action
 
 export default cartSlice.reducer;

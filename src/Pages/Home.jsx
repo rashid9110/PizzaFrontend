@@ -17,6 +17,7 @@ function Home() {
   const dispatch=useDispatch();
 
   const {productsData}=useSelector((state)=>state.product)
+  console.log(productsData)
   useEffect(()=>{
     //This will be called when the component mounts
     dispatch(getAllProducts())

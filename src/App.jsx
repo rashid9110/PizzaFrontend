@@ -12,7 +12,7 @@ import Order from './Pages/Order/Order'
 import OrderSuccess from './Pages/Order/OrderSuccess'
 import RequireAuth from './Components/Auth/RequireAuth'
 import Services from './Pages/service/Services'
-import AllProducts from './Pages/Products/allProducts'
+import AllProducts from './Pages/Products/AllProducts'
 
 function App() {
 

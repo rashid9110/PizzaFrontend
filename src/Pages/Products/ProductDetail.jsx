@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { addProductToCart, getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
 import { getproductDetails } from "../../Redux/Slices/ProductSlices";
 import Layout from "../../Layouts/Layouts";
 
 function ProductDetails() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
     const { productId } = useParams();
     const dispatch = useDispatch();
     const [productDetails, setProductDetails] = useState({});
@@ -157,7 +159,7 @@ function ProductDetails() {
                   <span className="text-2xl font-medium text-gray-900 title-font">
                     ₹{productDetails?.price}
                   </span>
-                  {isInCart ? (
+                  {isInCart ?  (
                     <button
                       className="flex px-6 py-2 ml-auto text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
                       onClick={() => handleRemove(productId)}
@@ -165,12 +167,22 @@ function ProductDetails() {
                       Remove from cart
                     </button>
                   ) : (
-                    <button
-                      className="flex px-6 py-2 ml-auto text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
-                      onClick={handleCart}
-                    >
-                      Add to Cart
-                    </button>
+                    isLoggedIn ? (
+                      <button
+                        className="flex px-6 py-2 ml-auto text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
+                        onClick={() => handleCart(productId)}
+                      >
+                        Add to Cart
+                      </button>
+                    ) : (
+                      <Link to="/auth/login">
+                        <button
+                          className="flex px-6 py-2 ml-auto text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
+                        >
+                          Add to Cart
+                        </button>
+                      </Link>
+                    )
                   )}
                 </div>
               </div>

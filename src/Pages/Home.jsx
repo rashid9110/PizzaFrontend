@@ -11,10 +11,13 @@ import Layout from "../Layouts/Layouts.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../Redux/Slices/ProductSlices.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
   const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
 
   const {productsData}=useSelector((state)=>state.product)
   console.log(productsData)
@@ -38,12 +41,24 @@ function Home() {
             The Pizza App lets you order your favorite pizza from the comfort of
             your home.
           </p>
-          <button className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group">
+          {isLoggedIn ?(
+          <button className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group"
+            onClick={() => navigate('/AllProducts')}
+
+          >
             Order Now
             <span className="inline-block ml-3 transition-transform ease-in-out group-hover:translate-x-2">
               <IconArrowRight />
             </span>
           </button>
+          ): (
+            <Link to={'/auth/login'}  className="flex items-center px-4 py-2 w-40 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group"> Order Now
+            <span className="inline-block ml-3 transition-transform ease-in-out group-hover:translate-x-2">
+              <IconArrowRight />
+            </span>
+            </Link>
+            
+        )}
         </div>
         <div>
           <img src={PizzaImage} alt="Pizza" width={550} height={550} />
@@ -175,7 +190,7 @@ function Home() {
                                                     {item.description}
                                                 </p>
                                                 <p className="text-lg font-medium text-gray-900 title-font">
-                                                    ${item.price}
+                                                ₹{item.price}
                                                 </p>
                                             </div>
                                         </div>

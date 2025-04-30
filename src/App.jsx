@@ -11,6 +11,8 @@ import CartDetails from './Pages/Cart/CartDetails'
 import Order from './Pages/Order/Order'
 import OrderSuccess from './Pages/Order/OrderSuccess'
 import RequireAuth from './Components/Auth/RequireAuth'
+import Services from './Pages/service/Services'
+import AllProducts from './Pages/Products/allProducts'
 
 function App() {
 
@@ -33,6 +35,10 @@ function App() {
 
         <Route path='/admin/addProduct'element={<AddProduct/>}/>
         <Route path='/product/:productId'element={<ProductDetails/>}/>
+
+        <Route path="/AllProducts" element={<AllProducts />} />
+        <Route path='/Services' element={<Services/>}/>
+
 
         <Route path='*'element={<NotFound/>}/>
 

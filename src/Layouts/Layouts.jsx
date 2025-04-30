@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { getCartDetails } from "../Redux/Slices/CartSlice";
 function Layout({ children }) {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector((state) => state.auth.role);
+
 
   console.log('isLoggedIn', isLoggedIn);
   const {cartsData} = useSelector((state) => state.cart);
@@ -48,7 +50,7 @@ function Layout({ children }) {
             </li>
             <li className="hover:text-[#FF9110]">
               {" "}
-              <p>Services </p>
+              <p onClick={()=>Navigate('/Services')}>Services </p>
             </li>
             <li className="hover:text-[#FF9110]">
               {" "}
@@ -58,9 +60,17 @@ function Layout({ children }) {
         </div>
         <div>
           <ul className="flex gap-4">
-          <li className='hover:text-[#FF9110]'>
+          <li >
                             {isLoggedIn ? (
-                                <Link onClick={handleLogout}>Logout</Link>
+                              <>
+                            <div className=" items-center">
+                                <Link onClick={handleLogout} className='hover:text-[#FF9110]'>Logout    </Link>
+        
+                                {role==="ADMIN" ?(
+                                  <Link to={'/admin/addProduct'} className="hover:text-[#f4b56d]">Add Product</Link>
+                                ): null}
+                                </div>
+                              </>
                             ) : (
                                 <Link to={'/auth/login'}>Login</Link>
                             )}
@@ -75,6 +85,7 @@ function Layout({ children }) {
                             </Link>
                             
                         )}
+                       
           </ul>
         </div>
       </nav>

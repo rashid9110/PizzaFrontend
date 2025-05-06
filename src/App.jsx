@@ -13,10 +13,35 @@ import OrderSuccess from './Pages/Order/OrderSuccess'
 import RequireAuth from './Components/Auth/RequireAuth'
 import Services from './Pages/service/Services'
 import AllProducts from './Pages/Products/AllProducts'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  useEffect(() => {
+    const waitForTidio = () => {
+      if (window.tidioChatApi) {
+        window.tidioChatApi.on("ready", () => {
+          if (isLoggedIn) {
+            window.tidioChatApi.show();
+            console.log("Tidio chat shown");
+          } else {
+            window.tidioChatApi.hide();
+            console.log("Tidio chat hidden");
+          }
+        });
+      } else {
+        setTimeout(waitForTidio, 500); // Wait until tidioChatApi loads
+      }
+    };
+  
+    waitForTidio();
+  }, [isLoggedIn]);
+  
+  
   return (
+  
     <div>  
        <Routes>
         <Route path='/'element={<Home />}/>
